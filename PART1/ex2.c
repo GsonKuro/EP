@@ -1,19 +1,22 @@
 #include <stdio.h>
 
-int print_bits(int num)
+void print_bits(int num)
 {
-    int bitArray[] = {};
-    int rest;
+    int bitArray[32];
+    int i = 0;
 
-    for (int i = 0; num < 1; i++)
+    for (i = 0; num > 0; i++)
     {
-        rest = num%2;
-        bitArray[i] = rest;
-        num = num/2;
+        bitArray[i] = num%2;
+        num /=2;
     }
 
-    printf("O binaŕio é %d \n", rest);
+    for ( int j = i-1; j>=0; j--)
+    {
+        printf("%d", bitArray[j]);
+    }
     
+    printf("\n");
 }
 
 int main()

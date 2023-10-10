@@ -15,7 +15,7 @@ int print_bits(int num)
     printf("O binaŕio é %d \n", rest);
     
 }
-//sfesfsefsefesfesf
+
 int main()
 {
     int i;
@@ -26,3 +26,4 @@ int main()
 
     print_bits(i);
 }
+//afafafafafaf

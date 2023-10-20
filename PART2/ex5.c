@@ -14,42 +14,6 @@
 FILE *fp;
 
 //---------------------------------------//
-//       Creation of neural system
-//---------------------------------------//
-
-/*int neural(){
-    float   inputArrayWeight[3][2];
-    float   hiddenArrayWeight[1][3];
-    float   output = 0;
-
-    printf("primeira camada \n\n");
-
-    // Percorrer colunas
-    for (int i = 0; i < 3; i++){
-        // Percorrer linhas
-        for (int j = 0; j < 2; j++){      
-            printf("%f ", inputArrayWeight[i][j]);    
-        }
-        printf("\n");
-    }
-
-    printf("\ncamda escondida \n\n");
-    
-    // Percorrer colunas
-    for (int q = 0; q < 1; q++){
-        // Percorrer linhas
-        for (int e = 0; e < 3; e++){      
-            printf("%f ", hiddenArrayWeight[q][e]);    
-        }
-        printf("\n");
-    }
-
-    printf("\nultima camada\n\n");
-
-    printf("%f\n\n", output);
-}*/
-
-//---------------------------------------//
 //              Open File
 //---------------------------------------//
 
@@ -71,7 +35,7 @@ int openFILE(){
 
 int writeFILE(){
     // Open file to read
-    fp = fopen("redeneuralTest", "w");
+    fp = fopen("redeneural", "w");
 
     // if doesnt open will send message to the user
     if(fp == NULL){
@@ -132,6 +96,12 @@ int main(){
     float inputs[2];
     float output;
 
+    int inputLayer[1];
+    int inputNode[2];
+    int hiddenLayer[1];
+    int hiddenNode[3];
+    int weights[9];
+
     //neural();
 
 //---------------------------------------//
@@ -145,18 +115,42 @@ int main(){
     // Open file to write
     writeFILE();
 
-    // Write information about the network
-    fprintf(fp, "%d %d %d\n", I, H, O);
-    for (int i = 0; i < 9; i++)
-    {
-        fprintf(fp, "%d:%d %d:%d %f\n", li, ui, lo, uo, w);
+    fprintf(fp, "2 3 1\n");
+    fprintf(fp, "1:1 2:1 0.234\n");
+    fprintf(fp, "1:1 2:2 -0.345\n");
+    fprintf(fp, "1:1 2:3 1.124\n");
+    fprintf(fp, "1:2 2:1 0.098\n");
+    fprintf(fp, "1:2 2:2 -1.9877\n");
+    fprintf(fp, "1:2 2:3 0.0\n");
+    fprintf(fp, "2:1 3:1 0.0\n");
+    fprintf(fp, "2:2 3:1 0.0\n");
+    fprintf(fp, "2:3 3:1 0.0\n");
+
+    // Close file
+    fclose(fp);
+
+    //---------------------------------------//
+    //       Print information from file
+    //---------------------------------------//
+
+    // Open file to read
+    openFILE();
+
+    fscanf(fp, "%d %d %d", &I, &H, &O);
+
+    printf("I = %d, H = %d, O = %d\n", I, H, O);
+
+    while (fscanf(fp, "%d:%d %d:%d %lf", &li, &ui, &lo, &uo, &w) == 5){
+        printf("Li -> %d:%d %d:%d %f\n", li, ui, lo, uo, w);
     }
+
+    printf("\n");
 
     // Close file
     fclose(fp);
 
     //---------------------------------------------------------------------//
-    //        Get information in file to calculate output of network
+    //        Get information from file to calculate output of network
     //---------------------------------------------------------------------//
 
     // Open file to read
@@ -196,24 +190,6 @@ int main(){
 
     // Do the calculation necessary to get output
     sumMul(inputArrayWeight,hiddenArrayWeight,inputs);
-
-    // Open file to read
-    openFILE();
-
-    //---------------------------------------//
-    //       Print information in file
-    //---------------------------------------//
-
-    fscanf(fp, "%d %d %d", &I, &H, &O);
-
-    printf("I = %d, H = %d, O = %d\n", I, H, O);
-
-    while (fscanf(fp, "%d:%d %d:%d %lf", &li, &ui, &lo, &uo, &w) == 5){
-        printf("Li -> %d:%d %d:%d %f\n", li, ui, lo, uo, w);
-    }
-
-    // Close file
-    fclose(fp);
 
     return 0;
 }

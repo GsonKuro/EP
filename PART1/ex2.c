@@ -22,7 +22,6 @@ void print_bits(int num)
 int main()
 {
     int i;
-    int p;
 
     printf("Write a integer:");
     scanf("%d",&i);

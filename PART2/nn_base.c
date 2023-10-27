@@ -25,7 +25,7 @@ int openFILE(){
 
     printf("Type the name of the file to read\n");
 
-    scanf("%s\n", name_file);
+    scanf("%s", name_file);
 
     // Open file to read
     fp = fopen(name_file, "r");
@@ -49,7 +49,7 @@ int writeFILE(){
 
     printf("Type the name of the file to write\n");
 
-    scanf("%s\n", name_file);
+    scanf("%s", name_file);
 
     fp = fopen(name_file, "w");
 
